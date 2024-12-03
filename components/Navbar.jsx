@@ -73,11 +73,12 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState("Explore NFTs");
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(0);
 
   // console.log({ theme });
 
   return (
-    <nav className="flexBetween w-full fixed z-10 p-4 flex-row border-b  bg-white dark:border-nft-black-1 border-nft-gray-1">
+    <nav className="flexBetween w-full fixed z-10 p-4 flex-row border-b dark:bg-nft-dark bg-white dark:border-nft-black-1 border-nft-gray-1">
       <div className="flex flex-1 flex-row justify-start">
         <Link href={"/"}>
           <div className="flexCenter md:hidden cursor-pointer">
@@ -123,13 +124,38 @@ const Navbar = () => {
             <div className="w-3 h-3 absolute bg-white rounded-full ball" />
           </label>
         </div>
+
+        <div className="md:hidden flex">
+          {" "}
+          <MenuItems active={active} setActive={setActive} />{" "}
+          <div className="ml-4">
+            <ButtonGroup setActive={setActive} router={router} />
+          </div>
+        </div>
       </div>
-      <div>
-        {" "}
-        <MenuItems active={active} setActive={setActive} />{" "}
-      </div>
-      <div className="ml-4">
-        <ButtonGroup setActive={setActive} router={router} />
+
+      <div className="hidden md:flex ml-2">
+        {isOpen ? (
+          <Image
+            src={images.cross}
+            objectFit="contain"
+            width={25}
+            height={25}
+            alt="cross"
+            onClick={() => setIsOpen(!isOpen)}
+            className={theme === "light" && "filter invert"}
+          />
+        ) : (
+          <Image
+            src={images.menu}
+            objectFit="contain"
+            width={25}
+            height={25}
+            alt="menu"
+            onClick={() => setIsOpen(!isOpen)}
+            className={theme === "light" && "filter invert"}
+          />
+        )}
       </div>
     </nav>
   );
