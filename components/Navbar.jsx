@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import images from "../assets";
+import Button from "./Button";
 
 const MenuItems = ({ isMobile, active, setActive }) => {
   const generateLink = (idx) => {
@@ -45,9 +46,33 @@ const MenuItems = ({ isMobile, active, setActive }) => {
   );
 };
 
+const ButtonGroup = ({ setActive, router }) => {
+  const hasConnected = 1;
+
+  return hasConnected ? (
+    <Button
+      btnName="Create"
+      classStyles={"mx-2 rounded-xl"}
+      handleClick={() => {
+        setActive("");
+        router.push("/create-nft");
+      }}
+    />
+  ) : (
+    <Button
+      classStyles={"mx-2 rounded-xl"}
+      handleClick={() => {
+        setActive("");
+        router.push("/connect-wallet");
+      }}
+    />
+  );
+};
+
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState("Explore NFTs");
+  const router = useRouter();
 
   // console.log({ theme });
 
@@ -102,6 +127,9 @@ const Navbar = () => {
       <div>
         {" "}
         <MenuItems active={active} setActive={setActive} />{" "}
+      </div>
+      <div className="ml-4">
+        <ButtonGroup setActive={setActive} router={router} />
       </div>
     </nav>
   );
