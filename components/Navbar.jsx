@@ -139,8 +139,8 @@ const Navbar = () => {
           <Image
             src={images.cross}
             objectFit="contain"
-            width={25}
-            height={25}
+            width={20}
+            height={20}
             alt="cross"
             onClick={() => setIsOpen(!isOpen)}
             className={theme === "light" && "filter invert"}
@@ -155,6 +155,21 @@ const Navbar = () => {
             onClick={() => setIsOpen(!isOpen)}
             className={theme === "light" && "filter invert"}
           />
+        )}
+        {isOpen && (
+          <div className="fixed inset-0 top-65 dark:bg-nft-dark bg-white z-10 nav-h flex justify-between flex-col p-2">
+            <div className="flex-1 p-4">
+              <MenuItems
+                active={active}
+                setActive={setActive}
+                isMobile
+                // router={router}
+              />
+            </div>
+            <div className="p-4 border-t dark:border-nft-black-1 border-nft-gray-1">
+              <ButtonGroup setActive={setActive} router={router} />
+            </div>
+          </div>
         )}
       </div>
     </nav>
