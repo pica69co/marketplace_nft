@@ -1,7 +1,8 @@
 import React from "react";
 
-const NFTCard = ({ nft }) => {
-  return <div>NFTCard</div>;
-};
+import images from "../assets";
+import Link from "next/link";
+
+const NFTCard = ({ nft }) => <div className="flex-1">{nft.name}</div>;
 
 export default NFTCard;
