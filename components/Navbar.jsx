@@ -47,7 +47,7 @@ const MenuItems = ({ isMobile, active, setActive }) => {
 };
 
 const ButtonGroup = ({ setActive, router }) => {
-  const hasConnected = 1;
+  const hasConnected = true;
 
   return hasConnected ? (
     <Button
@@ -73,7 +73,7 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState("Explore NFTs");
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   // console.log({ theme });
 
