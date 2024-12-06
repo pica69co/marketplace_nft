@@ -3,13 +3,19 @@ import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
 import { useTheme } from "next-themes";
 
-import { Button } from "../components";
+import { Button, Input } from "../components";
 import images from "../assets";
 import Image from "next/image";
 
 const CreateNFT = () => {
   const [fileUrl, setFileUrl] = useState(null);
+  const [formInput, setFormInput] = useState({
+    name: "",
+    description: "",
+    price: "",
+  });
   const { theme } = useTheme();
+  console.log(formInput);
 
   const onDrop = useCallback(() => {
     // Do something with the files: upload to ifps
@@ -64,6 +70,7 @@ const CreateNFT = () => {
                     className={theme === "light" && "filter invert"}
                   />
                 </div>
+
                 <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-sm">
                   Drag and Drop File{" "}
                 </p>
@@ -79,6 +86,38 @@ const CreateNFT = () => {
                 </aside>
               )}
             </div>
+          </div>
+          <Input
+            inputType="input"
+            title="Name"
+            placeholder="NFT Name"
+            handleClick={(e) =>
+              setFormInput({ ...formInput, name: e.target.value })
+            }
+          />
+          <Input
+            inputType="textarea"
+            title="Description"
+            placeholder="NFT Description"
+            handleClick={(e) =>
+              setFormInput({ ...formInput, description: e.target.value })
+            }
+          />
+          <Input
+            inputType="number"
+            title="Price"
+            placeholder="NFT Price"
+            handleClick={(e) =>
+              setFormInput({ ...formInput, price: e.target.value })
+            }
+          />
+
+          <div className="mt-8 w-full flex justify-end">
+            <Button
+              btnName="Create NFT"
+              handleClick={(e) => {}}
+              className="rounded-xl"
+            />
           </div>
         </div>
       </div>
