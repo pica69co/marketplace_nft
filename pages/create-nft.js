@@ -15,7 +15,7 @@ const CreateNFT = () => {
     price: "",
   });
   const { theme } = useTheme();
-  console.log(formInput);
+  // console.log(formInput);
 
   const onDrop = useCallback(() => {
     // Do something with the files: upload to ifps
