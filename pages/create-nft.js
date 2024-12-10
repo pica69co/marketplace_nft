@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { Button, Input } from "../components";
 import images from "../assets";
 import Image from "next/image";
+import { NftContext } from "../context/NftContext";
 
 const CreateNFT = () => {
   const [fileUrl, setFileUrl] = useState(null);
@@ -15,10 +16,17 @@ const CreateNFT = () => {
     price: "",
   });
   const { theme } = useTheme();
+  const { uploadToIPFS, createNfts } = useContext(NftContext);
+  const router = useRouter();
   // console.log(formInput);
 
-  const onDrop = useCallback(() => {
-    // Do something with the files: upload to ifps
+  const onDrop = useCallback(async (acceptedFile) => {
+    console.log("file: ->", acceptedFile);
+
+    const url = await uploadToIPFS(acceptedFile[0]);
+    console.log({ url });
+
+    setFileUrl(url);
   }, []);
 
   const {
@@ -115,7 +123,7 @@ const CreateNFT = () => {
           <div className="mt-8 w-full flex justify-end">
             <Button
               btnName="Create NFT"
-              handleClick={(e) => {}}
+              handleClick={() => createNfts(formInput, fileUrl, router)}
               className="rounded-xl"
             />
           </div>
